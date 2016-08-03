@@ -1,21 +1,21 @@
-{{ template "../base.tpl" . }}
+<<< template "../base.tpl" . >>>
 
-{{ define "css" }}
+<<< define "css" >>>
 <link rel="stylesheet" href='/static/css/custom.css' />
-{{ end }}
+<<< end >>>
 
 
-{{ define "content" }}
+<<< define "content" >>>
 <div class="container">
-   Email :  {{ .userEmail }}<br>
-   username:  {{ .username }}<br>
-   password :  {{ .password }}
+   Email :  <<< .userEmail >>><br>
+   username:  <<< .username >>><br>
+   password :  <<< .password >>>
 </div>
-{{ end }}
+<<< end >>>
 
 
-{{ define "js" }}
+<<< define "js" >>>
 <script src="/static/js/custom.js"></script>
-{{ end }}
+<<< end >>>
 
 

@@ -20,7 +20,7 @@ type UserAuthController struct {
 	beego.Controller
 }
 
-func (c *UserAuthController) Get() {
+func (c *UserAuthController) Login() {
 	c.TplName = "userAuth/login.tpl"
 }
 
