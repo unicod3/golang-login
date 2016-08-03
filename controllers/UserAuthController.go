@@ -25,12 +25,17 @@ func (c *UserAuthController) Login() {
 }
 
 
-func (this *UserAuthController) Post() {
+func (c *UserAuthController) Register() {
+	c.TplName = "userAuth/register.tpl"
+}
+
+
+func (this *UserAuthController) LoginHandler() {
 
     username := this.GetString("Username")
-//    password := this.GetString("password")
+    password := this.GetString("Password")
 
-    this.TplName = "userAuth/registration.tpl"
+    this.TplName = "welcome/index.tpl"
     url := "172.17.0.2:27017"
     database := "testDB"
     collection := "users"
@@ -46,14 +51,19 @@ func (this *UserAuthController) Post() {
     c := session.DB(database).C(collection)
 
     result := User{}
-    err = c.Find(bson.M{"username" : username}).One(&result)
-    if(err != nil){
-        panic(err)
-    }
-    this.Data["userEmail"] = result.Email
-    this.Data["username"] = result.Username
-    this.Data["password"] = result.Password
+    err = c.Find(bson.M{"username" : username, "password": password}).One(&result)
 
+    this.Data["Email"] = ""
+    this.Data["Username"] = ""
+    this.Data["Error"] = ""
+
+    if(err != nil){
+        log.Fatal(err)
+        this.Data["Error"] = err
+    }else{
+        this.Data["Email"] = result.Email
+        this.Data["Username"] = result.Username
+    }
 
     /*
     user := User{}

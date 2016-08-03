@@ -10,10 +10,7 @@
   <div class="l-welcome__container">
     <h1 class="l-welcome__brand">Go Test</h1>
     <a  href='<<<urlfor "UserAuthController.Login">>>' class="button button--filled button--primary">Login</a>
-  
-    <a [routerLink]="['./auth/register']" class="button button--filled button--primary">Sign Up</a>
-
-
+    <a href='<<<urlfor "UserAuthController.Register">>>' class="button button--filled button--primary">Sign Up</a>
   </div>
 <<< end >>>
 
