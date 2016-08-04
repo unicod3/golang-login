@@ -15,7 +15,7 @@
     <p>Phone: <strong>+1 5599999999</strong></p>
 
     <footer>
-      <button class="button button--primary button--filled">Logout</button>
+      <a href="<<<urlfor "UserAuthController.Logout">>>" class="button button--primary button--filled">Logout</a>
       <button class="button button--primary button--filled">Edit</button>
     </footer>
   </div>

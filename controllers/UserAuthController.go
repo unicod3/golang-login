@@ -29,6 +29,14 @@ func (c *UserAuthController) Login() {
 	c.TplName = "userAuth/login.tpl"
 }
 
+func (c *UserAuthController) Logout() {
+    s := c.GetSession("sesid")
+    if s != nil {
+       c.DelSession("sesid")
+    }
+    c.Redirect("/",302)
+        return
+}
 
 func (c *UserAuthController) Register() {
 	s := c.GetSession("sesid")
