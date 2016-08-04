@@ -83,24 +83,43 @@ func (this *UserAuthController) LoginHandler() {
         this.SetSession("sesid", result.Email)
         this.Redirect("/home",302)
     }
+}
 
-    /*
+
+func (this *UserAuthController) RegisterHandler() {
+
+    flash := beego.NewFlash()
+    email := this.GetString("email")
+    password := this.GetString("password")
+
+    url := "172.17.0.2:27017"
+    database := "testDB"
+    collection := "users"
+    session, err := mgo.Dial(url)
+
+    if(err != nil){
+       log.Fatal(err)
+    }
+    defer session.Close()
+
+    session.SetMode(mgo.Monotonic, true)
+
+    c := session.DB(database).C(collection)
+
     user := User{}
     user.Id = bson.NewObjectId()
-    user.Username = "testGO"
-    user.Password = "23123"
-    user.Email = "testEmail"
-
-
+    user.Password = password
+    user.Email = email
     err = c.Insert(&user)
-   // err = c.Insert(bson.M{"_id": bson.NewObjectId(), "username":"test", "password": "test11", "email":"123123@123.com"})
+
     if(err != nil){
-        panic(err)
+        flash.Error("Error Occured: Could not insert to database")
+        flash.Store(&this.Controller)
+        this.Redirect("/register",302)
+        return
+    }else{
+        //user logged in set session
+        this.SetSession("sesid", email)
+        this.Redirect("/profile",302)
     }
-
-        this.Data["userEmail"] = "testl"
-    this.Data["username"] = "username"
-    this.Data["password"] = "password"
-
-    */
 }

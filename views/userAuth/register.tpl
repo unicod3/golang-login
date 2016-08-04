@@ -2,55 +2,55 @@
 
 <<< define "css" >>>
 <link rel="stylesheet" href='/static/css/custom.css' />
+<style>
+body{
+    background:#7A7B7C;
+    padding-top:1.5em;
+}
+</style>
 <<< end >>>
 
 
 <<< define "content" >>>
-<div class="container">
-    <div class="row vertical-offset-75">
-    	<div class="col-md-6 col-md-offset-3">
-    		<div class="panel panel-default">
-			  	<div class="panel-heading text-center">
-			    	<h3 class="panel-title"><strong>Login</strong></h3>
-			 	</div> 
+<div class="l-auth">
+<div class="l-auth__wrapper">
+      <button class="l-auth__close"></button>
 
-			  	<div class="panel-body">
-			    	<form role="form" class="form-horizontal" method="POST" action='<<<urlfor "UserAuthController.Login">>>'>
-                      <<< .xsrfdata >>>
+      <router-outlet></router-outlet><div class="l-auth--login">
+      <div class="l-auth__body">
+  <header class="l-auth__header">
+    <h1 class="l-auth__title">Create Your Free Account</h1>
+  </header>
 
-                      <div class="form-group">
-                        <label for="inputEmail" class="col-sm-3 control-label">Username</label>
-                        <div class="col-sm-9">
-                          <input class="form-control" placeholder="Username" name="Username" value="" type="text" required id="inputEmail" />
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPassword" class="col-sm-3 control-label">Password</label>
-                        <div class="col-sm-9">
-			    		  <input class="form-control" placeholder="Password" name="Password" type="password" required id="inputPassword"  />
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-2 pull-right">
-			    		    <input class="btn btn-lg btn-success" type="submit" value="Submit"> 
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-3 pull-right">
-                            <a href="<<<urlfor "UserAuthController.PasswordReset">>>"> 
-                                forgot password »
-                            </a>
-                        </div>
-                      </div>
-                    </form>
-			    </div>
+  <button class="l-auth__provider l-auth__provider--linkedin button button--filled">
+    <span class="l-auth__provider-icon"></span>
+    Sign Up with Linked In
+  </button>
 
-                <div class="panel-footer text-center clearfix"> <a href='<<<urlfor "UserAuthController.Register">>>'>Register »</a></div>
-
-			</div>
-		</div>
-	</div>
+<form role="form" class="form form--default" method="POST" action='<<<urlfor "UserAuthController.Register">>>'>
+  <div class="l-auth__divisor">Or</div>
+<<< .xsrfdata >>>
+    <div class="l-auth__email form__group">
+      <label class="form__label">E-mail</label>
+      <input type="text" class="form__input ng-untouched ng-pristine ng-invalid" name="email" placeholder="" required="" ng-reflect-name="email">
+    </div>
+    <div class="l-auth__password form__group">
+      <label class="form__label">Password</label>
+      <input type="password" class="form__input ng-untouched ng-pristine ng-invalid" name="password" placeholder="" required="" ng-reflect-name="password">
+    </div>
+    
+    <div class="form__group text-danger">
+        <<<.flash.error>>>
+    </div>
+    
 </div>
+<footer class="l-auth__footer">
+  <button type="submit" class="l-auth__continue button button--filled button--primary button--lg">Sign Up</button>
+  <p class="l-auth__existing">Already have an account? <a ng-reflect-router-link="../register" ng-reflect-href="/welcome/auth/register" href='<<<urlfor "UserAuthController.Login">>>'>Log In!</a></p>
+</footer>
+  </form>
+</div>
+    </div>
 <<< end >>>
 
 
