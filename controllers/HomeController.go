@@ -18,7 +18,7 @@ func (this *HomeController) Index() {
     sesid := this.GetSession("sesid")
 
     if(sesid == nil){
-        this.Redirect("/login",302)
+        this.Redirect("/",302)
         return
     }
     this.TplName = "home/index.tpl"
@@ -43,7 +43,13 @@ func (this *HomeController) Index() {
         this.Redirect("/login",302)
         return
     }else{
-        this.Data["Email"] = result.Email
-        this.Data["Username"] = result.Username
+        this.Data["email"] = result.Email
+        this.Data["firstName"] = result.FirstName
+        this.Data["lastName"] = result.LastName
+        this.Data["company"] = result.Company
+        this.Data["categories"] = result.Categories
+        this.Data["address1"] = result.Address1
+        this.Data["address2"] = result.Address2
+        this.Data["phone"] = result.Phone
     }
 }

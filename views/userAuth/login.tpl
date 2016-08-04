@@ -32,7 +32,7 @@ body{
 <<< .xsrfdata >>>
     <div class="l-auth__email form__group">
       <label class="form__label">E-mail</label>
-      <input type="text" class="form__input ng-untouched ng-pristine ng-invalid" name="email" placeholder="" required="" ng-reflect-name="email">
+      <input type="email" class="form__input ng-untouched ng-pristine ng-invalid" name="email" placeholder="" required="" ng-reflect-name="email">
     </div>
     <div class="l-auth__password form__group">
       <label class="form__label">Password</label>
@@ -45,9 +45,9 @@ body{
     
 </div>
 <footer class="l-auth__footer">
-  <a class="l-auth__forgot-password" ng-reflect-router-link="../password" ng-reflect-href="/welcome/auth/password" href="/welcome/auth/password">Forgot password?</a>
+  <a class="l-auth__forgot-password" ng-reflect-router-link="../password" ng-reflect-href="/welcome/auth/password" href='<<<urlfor "UserAuthController.Password">>>'>Forgot password?</a>
   <button type="submit" class="l-auth__continue button button--filled button--primary button--lg">Log In</button>
-  <p class="l-auth__existing">Do not have an account? <a ng-reflect-router-link="../register" ng-reflect-href="/welcome/auth/register" href="/welcome/auth/register">Sign Up!</a></p>
+  <p class="l-auth__existing">Do not have an account? <a ng-reflect-router-link="../register" ng-reflect-href="/welcome/auth/register" href='<<<urlfor "UserAuthController.Register">>>'>Sign Up!</a></p>
 </footer>
   </form>
 </div>

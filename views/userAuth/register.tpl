@@ -32,7 +32,7 @@ body{
 <<< .xsrfdata >>>
     <div class="l-auth__email form__group">
       <label class="form__label">E-mail</label>
-      <input type="text" class="form__input ng-untouched ng-pristine ng-invalid" name="email" placeholder="" required="" ng-reflect-name="email">
+      <input type="email" class="form__input ng-untouched ng-pristine ng-invalid" name="email" placeholder="" required="" ng-reflect-name="email">
     </div>
     <div class="l-auth__password form__group">
       <label class="form__label">Password</label>
