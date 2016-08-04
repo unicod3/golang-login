@@ -21,21 +21,31 @@ type UserAuthController struct {
 }
 
 func (c *UserAuthController) Login() {
+    s := c.GetSession("sesid")
+    if s != nil {
+        c.Redirect("/home",302)
+        return
+    }
 	c.TplName = "userAuth/login.tpl"
 }
 
 
 func (c *UserAuthController) Register() {
-	c.TplName = "userAuth/register.tpl"
+	s := c.GetSession("sesid")
+    if(s != nil){
+        c.Redirect("/home",302)
+        return
+    }
+    c.TplName = "userAuth/register.tpl"
 }
 
 
 func (this *UserAuthController) LoginHandler() {
 
-    username := this.GetString("Username")
-    password := this.GetString("Password")
+    flash := beego.NewFlash()
+    email := this.GetString("email")
+    password := this.GetString("password")
 
-    this.TplName = "welcome/index.tpl"
     url := "172.17.0.2:27017"
     database := "testDB"
     collection := "users"
@@ -43,7 +53,7 @@ func (this *UserAuthController) LoginHandler() {
 
     if(err != nil){
        log.Fatal(err)
-   }
+    }
     defer session.Close()
 
     session.SetMode(mgo.Monotonic, true)
@@ -51,18 +61,19 @@ func (this *UserAuthController) LoginHandler() {
     c := session.DB(database).C(collection)
 
     result := User{}
-    err = c.Find(bson.M{"username" : username, "password": password}).One(&result)
-
-    this.Data["Email"] = ""
-    this.Data["Username"] = ""
-    this.Data["Error"] = ""
+    err = c.Find(bson.M{"email" : email, "password":password}).One(&result)
 
     if(err != nil){
-        log.Fatal(err)
-        this.Data["Error"] = err
+        flash.Error("Username or Password is not correct")
+        flash.Store(&this.Controller)
+        this.Redirect("/login",302)
+        return
     }else{
         this.Data["Email"] = result.Email
         this.Data["Username"] = result.Username
+        //user logged in set session
+        this.SetSession("sesid", result.Email)
+        this.Redirect("/home",302)
     }
 
     /*
